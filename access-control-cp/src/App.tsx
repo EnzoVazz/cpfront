@@ -32,10 +32,10 @@ export default function App(){
       <header className="bg-gray-800 shadow-md p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold text-white">Controle de acessos</h1>
         {usuario ?(
-          <div>
-            <div>
-              <p>Bem-vindo, {usuario.nome}</p>
-              <p>{usuario.email}</p>
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <p className="font-semibold text-white">Bem-vindo, {usuario.nome}</p>
+              <p className="text-sm text-gray-400">{usuario.email}</p>
             </div>
             <button onClick={handleLogout}>Sair</button>
           </div>
