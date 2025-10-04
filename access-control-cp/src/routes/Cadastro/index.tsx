@@ -21,6 +21,10 @@ export default function Cadastro() {
                 <input {...register("nome", { required: "O nome é obrigatório" })} placeholder="Nome Completo" />
                 {errors.nome && <small>{errors.nome.message}</small>}
             </div>
+            <div>
+                <input {...register("nomeUsuario", { required: "O nome de usuário é obrigatório" })} placeholder="Nome de Usuário" />
+                {errors.nomeUsuario && <small>{errors.nomeUsuario.message}</small>}
+            </div>
             
       </form>
       <p>
