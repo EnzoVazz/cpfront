@@ -37,15 +37,15 @@ export default function App(){
               <p className="font-semibold text-white">Bem-vindo, {usuario.nome}</p>
               <p className="text-sm text-gray-400">{usuario.email}</p>
             </div>
-            <button onClick={handleLogout}>Sair</button>
+            <button onClick={handleLogout} className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition">Sair</button>
           </div>
         ) : (
           <nav>
-            <Link to="/login">Login</Link>
+            <Link to="/cadastro" className="text-blue-400 font-medium hover:underline">Cadastro</Link>
           </nav>
         )}
       </header>
-      <main>
+      <main className="flex items-center justify-center p-4">
         <Outlet/>
       </main>
     </div>
