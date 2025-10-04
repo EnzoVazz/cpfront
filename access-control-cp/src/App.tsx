@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, Link } from "react-router-dom";
+import "./globals.css";
 
 interface TipoUsuario{
   id: number;
@@ -27,9 +28,9 @@ export default function App(){
   };
 
   return(
-    <div>
-      <header>
-        <h1>Controle de acessos</h1>
+    <div className="bg-gray-900 text-gray-200 min-h-screen font-sans">
+      <header className="bg-gray-800 shadow-md p-4 flex justify-between items-center">
+        <h1 className="text-xl font-bold text-white">Controle de acessos</h1>
         {usuario ?(
           <div>
             <div>
