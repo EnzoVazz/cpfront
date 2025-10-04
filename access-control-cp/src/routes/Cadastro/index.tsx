@@ -8,10 +8,20 @@ export default function Cadastro() {
     handleSubmit,
     formState:{ errors },
   } = useForm<TipoCadastro>();
+  
 
   const onSubmit = (data: TipoCadastro) => {
+    try{
+      const respostaEmail = await fetch(`http://localhost:3001/usuarios?email=${data.email}`);
+      const emailData = await respostaEmail.json();
+      if (emailData.length > 0) {
+        setError("email", { type: "manual", message: "Este e-mail já está em uso." });
+        return;
+      }
+      
+
     
-  };
+  }
 
   return (
     <div>
@@ -46,4 +56,5 @@ export default function Cadastro() {
       </p>
     </div>
   );
+  }
 }
