@@ -25,7 +25,23 @@ export default function Cadastro() {
         setError("nomeUsuario", { type: "manual", message: "Este nome de usuário já está em uso." });
         return;
       }
-      
+      const response = await fetch('http://localhost:3001/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert("Cadastro realizado com sucesso!");
+        navigate('/login'); 
+      } else {
+        alert("Ocorreu um erro no cadastro.");
+      }
+    } catch (error) {
+      alert("Não foi possível conectar ao servidor.");
+    }
   };
     
 
