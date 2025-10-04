@@ -13,12 +13,16 @@ export default function Cadastro() {
     
   };
 
-  
-
   return (
     <div>
       <h1>Página de Cadastro</h1>
-
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <div>
+                <input {...register("nome", { required: "O nome é obrigatório" })} placeholder="Nome Completo" />
+                {errors.nome && <small>{errors.nome.message}</small>}
+            </div>
+            
+      </form>
       <p>
        <Link to="/login">Já tem uma conta? Faça o login</Link>
       </p>
