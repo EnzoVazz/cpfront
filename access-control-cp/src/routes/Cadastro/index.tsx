@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { TipoCadastro } from '../../types/TipoCadastro';
 
 export default function Cadastro() {
@@ -7,10 +7,11 @@ export default function Cadastro() {
     register,
     handleSubmit,
     formState:{ errors },
+    setError,
   } = useForm<TipoCadastro>();
-  
+  const navigate = useNavigate(); 
 
-  const onSubmit = (data: TipoCadastro) => {
+  const onSubmit = async (data: TipoCadastro) => {
     try{
       const respostaEmail = await fetch(`http://localhost:3001/usuarios?email=${data.email}`);
       const emailData = await respostaEmail.json();
@@ -18,10 +19,15 @@ export default function Cadastro() {
         setError("email", { type: "manual", message: "Este e-mail já está em uso." });
         return;
       }
+      const respostaUsuario = await fetch(`http://localhost:3001/usuarios?nomeUsuario=${data.nomeUsuario}`);
+      const userData = await respostaUsuario.json();
+      if (userData.length > 0) {
+        setError("nomeUsuario", { type: "manual", message: "Este nome de usuário já está em uso." });
+        return;
+      }
       
-
+  };
     
-  }
 
   return (
     <div>
@@ -56,5 +62,4 @@ export default function Cadastro() {
       </p>
     </div>
   );
-  }
 }
