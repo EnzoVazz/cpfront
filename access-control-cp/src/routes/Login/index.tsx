@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { TipoLogin } from '../../types/TipoLogin';
 import { useForm } from 'react-hook-form';
 
@@ -7,11 +7,30 @@ export default function Login() {
     register,
     handleSubmit, 
     formState: { errors },
+    setError,
   } = useForm<TipoLogin>();
+  const navigate = useNavigate();
 
-  const onSubmit = (data: TipoLogin) => {
-     
+
+  const onSubmit = async (data: TipoLogin) => {
+    try {
+      const response = await fetch(`http://localhost:3001/usuarios?nomeUsuario=${data.nomeUsuario}&email=${data.email}`);
+
+      const users = await response.json();
+
+      if (users.length > 0) {
+        alert(`Login bem-sucedido! Bem-vindo, ${users[0].nome}`);
+        sessionStorage.setItem('usuarioLogado', JSON.stringify(users[0]));
+        navigate('/');
+        
+      } else {
+        setError("root", { message: "Nome de usuário ou e-mail inválido." });
+      }
+    }catch (error) {
+      alert("Não foi possível conectar ao servidor.");
+    }
   };
+     
   return (
     <div>
       <h1>Página de Login</h1>
