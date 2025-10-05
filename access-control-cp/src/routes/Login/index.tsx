@@ -21,7 +21,7 @@ export default function Login() {
       if (users.length > 0) {
         alert(`Login bem-sucedido! Bem-vindo, ${users[0].nome}`);
         sessionStorage.setItem('usuarioLogado', JSON.stringify(users[0]));
-        navigate('/');
+        navigate('/home');
         
       } else {
         setError("root", { message: "Nome de usuário ou e-mail inválido." });
