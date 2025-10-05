@@ -28,7 +28,7 @@ export default function App(){
   };
 
   return(
-    <div className="bg-gray-900 text-gray-200 min-h-screen font-sans">
+    <div className="bg-gray-900 text-gray-200 min-h-screen font-sans flex flex-col">
       <header className="bg-gray-800 shadow-md p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold text-white">Controle de acessos</h1>
         {usuario ?(
@@ -45,7 +45,7 @@ export default function App(){
           </nav>
         )}
       </header>
-      <main className="flex items-center justify-center p-4">
+      <main className="flex flex-1 items-center justify-center p-4">
         <Outlet/>
       </main>
     </div>
