@@ -46,35 +46,58 @@ export default function Cadastro() {
     
 
   return (
-    <div>
-      <h1>Página de Cadastro</h1>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div>
-                <input {...register("nome", { required: "O nome é obrigatório" })} placeholder="Nome Completo" />
-                {errors.nome && <small>{errors.nome.message}</small>}
-            </div>
-            <div>
-                <input {...register("nomeUsuario", { required: "O nome de usuário é obrigatório" })} placeholder="Nome de Usuário" />
-                {errors.nomeUsuario && <small>{errors.nomeUsuario.message}</small>}
-            </div>
-            <div>
-                <input 
-                  type="email" 
-                  {...register("email", { 
-                    required: "O e-mail é obrigatório", 
-                    pattern: { 
-                      value: /^\S+@\S+$/i, 
-                      message: "Formato de e-mail inválido" 
-                    } 
-                  })} 
-                  placeholder="E-mail" 
-                />
-                {errors.email && <small>{errors.email.message}</small>}
-            </div>
-            <button type="submit">Cadastrar</button>
+    <div className="bg-gray-800 p-8 rounded-lg shadow-md w-96">
+      <h1 className="text-2xl font-bold mb-6 text-center text-white">Crie sua Conta</h1>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+        <div>
+          <label htmlFor="nome" className="block text-sm font-medium text-gray-300 mb-1">Nome Completo</label>
+          <input 
+            id="nome"
+            {...register("nome", { required: "O nome é obrigatório" })} 
+            placeholder="Seu nome completo" 
+            className="w-full px-3 py-2 bg-gray-700 text-gray-200 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+          />
+          {errors.nome && <small className="text-red-400 mt-1 block">{errors.nome.message}</small>}
+        </div>
+        <div>
+          <label htmlFor="nomeUsuario" className="block text-sm font-medium text-gray-300 mb-1">Nome de Usuário</label>
+          <input 
+            id="nomeUsuario"
+            {...register("nomeUsuario", { required: "O nome de usuário é obrigatório" })} 
+            placeholder="Seu nome de usuário" 
+            className="w-full px-3 py-2 bg-gray-700 text-gray-200 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+          />
+          {errors.nomeUsuario && <small className="text-red-400 mt-1 block">{errors.nomeUsuario.message}</small>}
+        </div>
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">E-mail</label>
+          <input
+            id="email"
+            type="email"
+            {...register("email", {
+              required: "O e-mail é obrigatório",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Formato de e-mail inválido"
+              }
+            })}
+            placeholder="voce@exemplo.com"
+            className="w-full px-3 py-2 bg-gray-700 text-gray-200 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+          />
+          {errors.email && <small className="text-red-400 mt-1 block">{errors.email.message}</small>}
+        </div>
+        
+        <button 
+          type="submit" 
+          className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition font-semibold"
+        >
+          Cadastrar
+        </button>
       </form>
-      <p>
-       <Link to="/login">Já tem uma conta? Faça o login</Link>
+      <p className="text-center mt-6 text-sm">
+        <Link to="/login" className="text-blue-400 hover:underline">
+          Já tem uma conta? Faça o login
+        </Link>
       </p>
     </div>
   );
