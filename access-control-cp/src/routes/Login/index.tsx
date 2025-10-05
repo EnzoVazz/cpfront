@@ -32,34 +32,50 @@ export default function Login() {
   };
      
   return (
-    <div>
-      <h1>Página de Login</h1>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <div className="bg-gray-800 p-8 rounded-lg shadow-md w-96">
+      <h1 className="text-2xl font-bold mb-6 text-center text-white">Login</h1>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
         <div>
+          <label htmlFor="nomeUsuario" className="block text-sm font-medium text-gray-300 mb-1">Nome de Usuário</label>
           <input
+            id="nomeUsuario"
             {...register("nomeUsuario", { required: "O nome de usuário é obrigatório" })}
-            placeholder="Nome de Usuário"
+            placeholder="Seu nome de usuário"
+            className="w-full px-3 py-2 bg-gray-700 text-gray-200 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
           />
-          {errors.nomeUsuario && <small>{errors.nomeUsuario.message}</small>}
+          {errors.nomeUsuario && <small className="text-red-400 mt-1 block">{errors.nomeUsuario.message}</small>}
         </div>
         <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">E-mail</label>
           <input
+            id="email"
             type="email"
-            {...register("email", { 
-                required: "O e-mail é obrigatório",
-                pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Formato de e-mail inválido"
-                }
+            {...register("email", {
+              required: "O e-mail é obrigatório",
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: "Formato de e-mail inválido"
+              }
             })}
-            placeholder="E-mail"
+            placeholder="voce@exemplo.com"
+            className="w-full px-3 py-2 bg-gray-700 text-gray-200 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
           />
-          {errors.email && <small>{errors.email.message}</small>}
+          {errors.email && <small className="text-red-400 mt-1 block">{errors.email.message}</small>}
         </div>
-        <button type="submit">Entrar</button>
+        
+        {errors.root && <small className="text-red-400 mt-1 block text-center">{errors.root.message}</small>}
+
+        <button 
+          type="submit" 
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-semibold"
+        >
+          Entrar
+        </button>
       </form>
-      <p>
-        <Link to="/cadastro">Não tem uma conta? Cadastre-se</Link>
+      <p className="text-center mt-6 text-sm">
+        <Link to="/cadastro" className="text-blue-400 hover:underline">
+          Não tem uma conta? Cadastre-se
+        </Link>
       </p>
     </div>
   );
